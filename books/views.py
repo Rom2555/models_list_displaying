@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 
 from books.models import Book
 
+
 def index(request):
     return redirect('books')
+
 
 def books(request):
     template = 'books/books.html'
@@ -29,6 +31,7 @@ def books_by_date(request, pub_date):
 
     if not books.exists():
         raise Http404("Книг на указанную дату не найдено")
+
 
     # Получаем уникальные даты публикаций для навигации
     all_dates = sorted(set(Book.objects.values_list('pub_date', flat=True)))
