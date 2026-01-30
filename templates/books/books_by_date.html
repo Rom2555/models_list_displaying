@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Книги за {{ current_date }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        .book {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .navigation {
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+        .navigation a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #0066cc;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Книги за дату {{ current_date }}</h1>
+
+    <ul style="list-style-type: none; padding: 0;">
+        {% for book in books %}
+            <li class="book">
+                <h3>{{ book.name }}</h3>
+                <p><strong>Автор:</strong> {{ book.author }}</p>
+                <p><strong>Дата публикации:</strong> {{ book.pub_date }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="navigation">
+        {% if prev_date %}
+            <a href="/books/{{ prev_date }}/">← Предыдущая дата ({{ prev_date }})</a>
+        {% endif %}
+
+        <a href="/books/">Все книги</a>
+
+        {% if next_date %}
+            <a href="/books/{{ next_date }}/">Следующая дата ({{ next_date }}) →</a>
+        {% endif %}
+    </div>
+</body>
+</html>
