@@ -121,3 +121,16 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+if DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
+
+# Register URL converters
+from django.urls import register_converter
+from books.converters import DateConverter
+
+register_converter(DateConverter, 'date')

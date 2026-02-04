@@ -1,5 +1,7 @@
 from datetime import date
-from django.http import Http404
+
+from django.utils import timezone
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 
 from books.models import Book
@@ -10,7 +12,7 @@ def index(request):
 
 
 def books(request):
-    template = 'books/books.html'
+    template = 'books/books_list.html'
     books = Book.objects.all().order_by('-pub_date')
 
     context = {'books': books}
@@ -51,3 +53,11 @@ def books_by_date(request, pub_date):
         'next_date': next_date,
     }
     return render(request, template, context)
+
+
+def test_home(request):
+    return HttpResponse(f"""
+    <h1>✅ НОВЫЙ ПРОЕКТ models_list_displaying</h1>
+    <p>Время запуска: {timezone.now()}</p>
+    <p>Папка: C:\\Users\\furer\\Desktop\\models_list_displaying</p>
+    """)
